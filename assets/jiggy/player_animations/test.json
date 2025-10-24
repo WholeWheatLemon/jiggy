@@ -1,0 +1,43 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"test": {
+			"player_animation_library": {
+				"name": "test",
+				"description": "test animation",
+				"author": "WholeWheatLemon (ollie)"
+			},
+			"loop": true,
+			"animation_length": 0.6,
+			"bones": {
+				"left_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -152.5]
+						},
+						"0.15": {
+							"vector": [0, 0, -102.5],
+							"easing": "linear"
+						},
+						"0.3": {
+							"vector": [0, 0, -152.5],
+							"easing": "linear"
+						},
+						"0.45": {
+							"vector": [0, 0, -102.5],
+							"easing": "linear"
+						},
+						"0.6": {
+							"vector": [0, 0, -152.5],
+							"easing": "linear"
+						}
+					},
+					"position": {
+						"vector": [1, 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

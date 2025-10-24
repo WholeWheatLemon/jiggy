@@ -5,5 +5,6 @@ import net.fabricmc.api.ModInitializer
 class Jiggy : ModInitializer {
 
     override fun onInitialize() {
+
     }
 }

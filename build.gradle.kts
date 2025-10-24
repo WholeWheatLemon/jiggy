@@ -46,6 +46,8 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+    mavenCentral()
+    maven(url = "https://repo.redlance.org/public")
 }
 
 dependencies {
@@ -56,6 +58,8 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:${project.property("kotlin_loader_version")}")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
+
+    modImplementation("com.zigythebird.playeranim:PlayerAnimationLibFabric:${project.property("pal_version")}")
 }
 
 tasks.processResources {
