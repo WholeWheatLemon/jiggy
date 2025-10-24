@@ -3,7 +3,6 @@ package lol.ollie.jiggy.client
 import com.zigythebird.playeranim.animation.PlayerAnimationController
 import com.zigythebird.playeranim.api.PlayerAnimationAccess
 import com.zigythebird.playeranim.api.PlayerAnimationFactory
-import com.zigythebird.playeranimcore.animation.AnimationController
 import com.zigythebird.playeranimcore.enums.PlayState
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -12,7 +11,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import net.minecraft.entity.PlayerLikeEntity
-import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
 
@@ -30,27 +28,31 @@ class JiggyClient : ClientModInitializer {
 
         val animationLayer = Identifier.of("jiggy", "emotes")
 
-        PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(animationLayer, 1000,
-            PlayerAnimationFactory { player: PlayerLikeEntity? ->
-                PlayerAnimationController(
-                    player,
-                    AnimationController.AnimationStateHandler { controller, state, animSetter -> PlayState.STOP }
-                )
-            }
-        )
+        PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(animationLayer, 1000) {
+            player: PlayerLikeEntity? ->
+                PlayerAnimationController(player) { _, _, _ -> PlayState.STOP
+                }
+        }
 
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient? ->
-            while (emoteWheelBind.wasPressed()) {
+            if (client?.player != null) {
 
-                client!!.player!!.sendMessage(Text.literal("emote!"), false)
+                val player = client.player!!
 
                 val controller = PlayerAnimationAccess.getPlayerAnimationLayer(
-                    client.player!!, animationLayer
+                    player, animationLayer
                 ) as PlayerAnimationController?
 
-                controller?.triggerAnimation(Identifier.of("jiggy", "test"))
+                while (emoteWheelBind.wasPressed()) {
+
+                    controller?.triggerAnimation(Identifier.of("jiggy", "test"))
+
+                }
+
+                if (player.isSneaking) {
+                    controller?.stopTriggeredAnimation()
+                }
             }
         })
-
     }
 }
