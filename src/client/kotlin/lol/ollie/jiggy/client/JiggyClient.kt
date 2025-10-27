@@ -4,6 +4,7 @@ import com.zigythebird.playeranim.animation.PlayerAnimationController
 import com.zigythebird.playeranim.api.PlayerAnimationAccess
 import com.zigythebird.playeranim.api.PlayerAnimationFactory
 import com.zigythebird.playeranimcore.enums.PlayState
+import lol.ollie.jiggy.client.menu.EditWheelScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
@@ -16,6 +17,7 @@ import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.render.RenderTickCounter
 import net.minecraft.client.util.InputUtil
 import net.minecraft.entity.PlayerLikeEntity
+import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.lwjgl.glfw.GLFW
 
@@ -35,6 +37,13 @@ class JiggyClient : ClientModInitializer {
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_R,
             KeyBinding.Category.create(Identifier.of("jiggy", "main"))
+        ))
+
+        val debugScreenBind = KeyBindingHelper.registerKeyBinding(KeyBinding(
+            "key.jiggy.debugscreen",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_P,
+            KeyBinding.Category(Identifier.of("jiggy", "main"))
         ))
 
         val animationLayer = Identifier.of("jiggy", "emotes")
@@ -66,6 +75,10 @@ class JiggyClient : ClientModInitializer {
 
                 if (player.isSneaking) {
                     controller?.stopTriggeredAnimation()
+                }
+
+                if (debugScreenBind.isPressed && MinecraftClient.getInstance().currentScreen == null) {
+                    MinecraftClient.getInstance().setScreen(EditWheelScreen(Text.literal("cool screen wow!")))
                 }
             }
         })
