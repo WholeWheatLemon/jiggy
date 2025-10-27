@@ -1,0 +1,47 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"nod": {
+			"player_animation_library": {
+				"name": "nod",
+				"description": "test animation 2!",
+				"author": "WholeWheatLemon (ollie)"
+			},
+			"animation_length": 1.2,
+			"bones": {
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.15": {
+							"vector": [32.5, 0, 0]
+						},
+						"0.3": {
+							"vector": [0, 0, 0]
+						},
+						"0.45": {
+							"vector": [32.5, 0, 0]
+						},
+						"0.6": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [32.5, 0, 0]
+						},
+						"0.9": {
+							"vector": [0, 0, 0]
+						},
+						"1.05": {
+							"vector": [32.5, 0, 0]
+						},
+						"1.2": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
